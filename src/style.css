@@ -1,0 +1,98 @@
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex: 1 0 0;
+  align-items: start;
+  justify-content: center;
+}
+
+body,
+#root {
+  display: contents;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  resize: both;
+  max-width: 100vw;
+  max-height: 100vh;
+
+  container-type: size;
+
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex-shrink: 0;
+  }
+}
+
+#klondike-board {
+  flex: 1 0 0;
+  overflow: auto;
+
+  display: grid;
+  grid-template-areas:
+    "stock waste . foundation1 foundation2 foundation3 foundation4"
+    "tableau1 tableau2 tableau3 tableau4 tableau5 tableau6 tableau7";
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: 1%;
+}
+
+.card {
+  touch-action: none;
+}
+
+.card > svg {
+  aspect-ratio: 84 / 122;
+  cursor: default;
+  user-select: none;
+}
+
+.slot {
+  justify-self: center;
+  width: calc(min(13cqw, 17cqh));
+  display: flex;
+  flex-direction: column;
+
+  > .card {
+    position: relative;
+    height: 0;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    flex: 0 1 auto;
+
+    > .card {
+      position: relative;
+      min-height: 0;
+      flex: 0 0 auto;
+      aspect-ratio: 3.5;
+
+      &.face-down {
+        aspect-ratio: 10;
+      }
+
+      &:last-child {
+        aspect-ratio: unset;
+      }
+    }
+  }
+}
+
+.emptyslot {
+  filter: contrast(0.1) brightness(2);
+}
+
+.dropactive {
+  filter: invert();
+  opacity: 1 !important;
+}
